@@ -1,0 +1,176 @@
+<!DOCTYPE project []>
+<project name="G4" default="build" basedir=".">
+
+	<!-- set global properties -->
+	<property name = "build"		location = "build"/>
+	<property name = "src"			location = "src"/>
+	<property name = "classpath"	location = "./build"/>
+
+
+
+
+	<property name="report.dir" 	location = "report"/>
+
+
+	<!-- property files -->
+	<property file="build.properties"/>
+	
+	
+	<target name = "JavaVersion" description="show java version">
+		<java classname = "null" fork = "yes">
+			<jvmarg line="-version w.w"/>
+		</java>
+	</target>
+
+	<path id="classes0">
+		<pathelement location="."/>
+		<pathelement location="./build"/>
+		<pathelement location=
+			"/usr/share/java/ant-swing.jar"
+			/>
+	</path>
+	
+	
+	<path id="classes1">
+		<pathelement location="."/>
+		<pathelement location="./build"/>
+		<pathelement location=
+			"/usr/share/eclipse/dropins/jdt/plugins/org.junit_4.8.2.dist/junit.jar"
+			/>
+		<pathelement location=
+			"/usr/share/eclipse/dropins/jdt/plugins/org.hamcrest.core_1.3.0.jar"
+		/>
+	</path>
+
+
+	<target name="init1">
+		<echo message=" INIT1 BEGINS... "/>
+		<tstamp/>
+	</target>
+
+
+	<target name="init" depends="init1"
+		description="Init">
+		<echo message=" INIT BEGINS... "/>
+
+		<echo>DSTAMP	= ${DSTAMP}</echo>
+		<echo>TSTAMP	= ${TSTAMP}</echo>
+		<echo>TODAY		= ${TODAY}</echo>
+
+		<echo message="ant.java.version = ${ant.java.version}"/>
+		<echo message="init, mkdir ${build}"/>
+		<mkdir dir="${build}"/>
+	</target>
+	
+	
+
+	<target name = "CompileJava" depends="init1" >
+		<!-- antstructure output="project.dtd"/  -->
+		<record 
+			name="logComp.txt" 
+			action="start" 
+			loglevel = "verbose"
+		/>
+		<javac 
+			srcdir="src" 
+			destdir="${build}" 
+			verbose = "no" 
+			deprecation = "yes" 
+			debug="true"
+			executable="${CC}"
+			fork = "yes"  
+			includeantruntime="false">
+			
+				<classpath refid="classes0"/>
+				<compilerarg value="-Xlint:unchecked"/>
+			
+			</javac>
+
+			<record name="logComp.txt" action="stop"/>
+		
+	</target><!--  -->
+	
+	<target name = "RunJavaClass">
+		<echo message = " jvm = ${JVM}"/>
+		<echo message = " BUILD = ${BUILD}"/>
+		<java  
+			classname = "hv.main.Main" 
+			fork = "true" jvm="${JVM}">
+			
+			<classpath refid="classes1"/>
+		</java>
+		
+		<input>RunJavaClass done, press Return...</input>
+		
+	</target><!-- <target name = "RunJavaClass"> -->
+
+	
+	
+	<target name="build" depends="init" 
+		description="Compile Java files.">
+		<echo message=" BUILD BEGINS... "/>
+		<antcall target = "JavaVersion" />
+
+		<antcall target = "CompileJava"/>
+		<!-- antcall target = "RunJavaDoc"/   -->
+		<antcall target = "RunJavaClass"/>	
+			
+	</target>	
+
+	<path id="jar-project-classpath">
+		
+	</path>	
+
+	<target name="clean">
+		<delete dir="bin" />
+		<mkdir dir="bin" />
+	</target>
+
+	<target name="copy-non-java-files">
+		<copy todir="bin" includeemptydirs="false">
+			<fileset dir="src" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="clean-jar">
+		<delete dir="build1" />
+		<mkdir dir="build1" />
+	</target>
+	
+	<target name="compile-jar-classes" depends="clean, copy-non-java-files">
+		<javac srcdir="src" destdir="bin" classpathref="jar-project-classpath"
+			deprecation="true" debug="true" debuglevel="lines,vars,source"
+			includeantruntime="false" />
+		<!-- dbug="true" == create debug info https://ant.apache.org/manual/Tasks/javac.html -->
+		<!-- deprecation="true" == show deprecated details -->
+		<!-- add classpath for jUnit classes -->
+	</target>
+
+	<tstamp prefix="build-info">
+		<format property="current-date" pattern="d-MMMM-yyyy" locale="en" />
+		<format property="current-time" pattern="hh:mm:ss a z" locale="en" />
+		<format property="year-month-day" pattern="yyyy-MM-dd" locale="en" />
+	</tstamp>
+
+	<target name="jar">
+		<jar basedir="bin" destfile="build1/${project-name}.jar">
+			<manifest>
+				<attribute name="Built-By" value="${builder}" />
+				<attribute name="Built-On" value="${build-info.current-date}" />
+				<attribute name="Built-At" value="${build-info.current-time}" />
+				<attribute name="Main-Class" value="${Main-Class}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="build-jar">
+		<antcall target="compile-jar-classes" />
+		<antcall target="clean-jar" />
+		<antcall target="jar" />
+	</target>
+
+
+
+</project>
+
+
