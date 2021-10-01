@@ -1,1 +1,21 @@
-    [javac] hv/main/Main.java omitted as /home/hv/HV/local/java/git4/G4/build/hv/main/Main.class is up to date.
+    [javac] hv/main/Main.java added as hv/main/Main.class is outdated.
+    [javac] hv/main/Mgr.java omitted as /home/hv/HV/local/java/git4/G4/build/hv/main/Mgr.class is up to date.
+    [javac] hv/main/RU.java added as hv/main/RU.class doesn't exist.
+    [javac] Compiling 2 source files to /home/hv/HV/local/java/git4/G4/build
+    [javac] Using external javac compiler
+    [javac] Compilation arguments:
+'-deprecation'
+'-d'
+'/home/hv/HV/local/java/git4/G4/build'
+'-classpath'
+'/home/hv/HV/local/java/git4/G4/build:/home/hv/HV/local/java/git4/G4:/usr/share/java/ant-swing.jar'
+'-sourcepath'
+'/home/hv/HV/local/java/git4/G4/src'
+'-g'
+'-Xlint:unchecked'
+
+The ' characters around the executable and arguments are
+not part of the command.
+    [javac] Files to be compiled:
+    [javac]     /home/hv/HV/local/java/git4/G4/src/hv/main/Main.java
+    /home/hv/HV/local/java/git4/G4/src/hv/main/RU.java
