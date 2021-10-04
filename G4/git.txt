@@ -1,0 +1,20 @@
+
+
+git add G4/git.txt   add file to index
+
+git diff --cached between index and HEAD
+git diff          between index and working dir
+git diff HEAD     between HEAD  and working dir
+
+ 
+$ git diff
+diff --git a/G4/git.txt b/G4/git.txt
+index db622fc..9348e98 100644
+--- a/G4/git.txt
++++ b/G4/git.txt
+ 
+ 
+ git checkout -- G4/git.txt  copy from index to working dir
+ 
+ new
+ 
