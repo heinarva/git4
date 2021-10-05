@@ -14,7 +14,91 @@ index db622fc..9348e98 100644
 +++ b/G4/git.txt
  
  
- git checkout -- G4/git.txt  copy from index to working dir
- 
+ git  checkout -- G4/git.txt  copy from index to working dir
+ add something...
  new
  
+ 
+ view cache content
+ git ls-files
+ git rm --cached -r G4/bin/hv/
+ git rm --cached -r G4/build/hv/
+ 
+ 
+git log --oneline
+8515426 (HEAD -> main, origin/main) "class Mgr added"
+f1f4e9e simplest java application
+
+
+remove from local
+git rm --cached G4/t1.txt
+
+list local
+git ls-files
+
+
+pingvinius.ru/git/1605
+git log --oneline    
+
+git diff --cached G4/git.txt
+
+git branch     show local branches
+
+git diff --name-only --cached      those files will be committed on next commit
+
+git diff --name-only HEAD^ HEAD   need failid lisati viimase commiti abil...
+
+git remote show -n G4/src/hv/main/Mgr.java
+git remote show -n G4/*
+
+git log --oneline                 vaata logi...
+8515426 (HEAD -> main, origin/main) "class Mgr added"
+f1f4e9e simplest java application
+
+
+
+
+git status -v     show staged changes
+
+Varem tehtud:
+
+git init
+
+
+--- I  osa
+
+git add G4/
+
+git config --global user.name "heinarva"
+git config --global user.email "heinarva@netscape.net"
+
+git commit -m "simplest java application"
+git remote add origin https://github.com/heinarva/git4.git
+git branch -M main
+
+git push -u origin main
+Username for 'https://github.com': heinarva
+Password for 'https://heinarva@github.com': <<personal access token>>
+
+
+--- II osa
+
+git add G4/
+
+git commit -a "class Mgr added"
+
+git push -u origin main
+Username for 'https://github.com': heinarva
+Password for 'https://heinarva@github.com': <<personal access token>>
+
+
+---
+
+1. logi
+git log --oneline
+8515426 (HEAD -> main, origin/main) "class Mgr added"
+f1f4e9e simplest java application
+
+2. 
+git diff --cached --name-only G4/            those files will be added on last commit
+
